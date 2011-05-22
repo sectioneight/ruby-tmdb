@@ -70,6 +70,11 @@ class TmdbMovie
     end
     return Tmdb.data_to_object(raw_data)
   end
+
+  def self.images(options)
+    results = Tmdb.api_call("Movie.getImages", options[:id] || options[:imdb], options[:language])
+    results.length == 1 ? results[0] : results
+  end
   
   def ==(other)
     return false unless(other.is_a?(TmdbMovie))
